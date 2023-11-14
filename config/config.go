@@ -19,7 +19,7 @@ var (
 	WsUrl = "wss://ws.bitget.com/spot/v1/stream"
 )
 
-func initConfig() {
+func InitConfig() {
 	err := godotenv.Load("bitget.env")
 	if err != nil {
 		log.Fatalf("Some error occured. Err: %s", err)

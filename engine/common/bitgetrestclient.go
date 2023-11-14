@@ -21,6 +21,7 @@ type BitgetRestClient struct {
 }
 
 func (p *BitgetRestClient) Init() *BitgetRestClient {
+	config.InitConfig()
 	p.ApiKey = config.ApiKey
 	p.ApiSecretKey = config.SecretKey
 	p.BaseUrl = config.BaseUrl
