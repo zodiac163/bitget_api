@@ -1,7 +1,6 @@
 package internal
 
 import (
-	"bitget/constants"
 	"encoding/json"
 	"errors"
 	"math"
@@ -9,6 +8,8 @@ import (
 	"net/url"
 	"strconv"
 	"time"
+
+	"github.com/zodiac163/bitget_api/constants"
 )
 
 func TimesStamp() string {

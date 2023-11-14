@@ -1,11 +1,12 @@
 package model
 
 import (
-	"bitget/logging/applogger"
 	"hash/crc32"
 	"sort"
 	"strconv"
 	"strings"
+
+	"github.com/zodiac163/bitget_api/logging/applogger"
 )
 
 type BookInfo struct {

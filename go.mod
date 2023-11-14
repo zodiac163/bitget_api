@@ -1,4 +1,4 @@
-module bitget
+module github.com/zodiac163/bitget_api
 
 go 1.17
 

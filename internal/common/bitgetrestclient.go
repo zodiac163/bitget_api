@@ -1,13 +1,14 @@
 package common
 
 import (
-	"bitget/config"
-	"bitget/constants"
-	"bitget/internal"
 	"io/ioutil"
 	"net/http"
 	"strings"
 	"time"
+
+	"github.com/zodiac163/bitget_api/config"
+	"github.com/zodiac163/bitget_api/constants"
+	"github.com/zodiac163/bitget_api/internal"
 )
 
 type BitgetRestClient struct {
