@@ -1,10 +1,11 @@
 package test
 
 import (
-	"bitget/internal/model"
-	"bitget/pkg/client/ws"
 	"fmt"
 	"testing"
+
+	"github.com/zodiac163/bitget_api/internal/model"
+	"github.com/zodiac163/bitget_api/pkg/client/ws"
 )
 
 func TestBitgetWsClient_New(t *testing.T) {

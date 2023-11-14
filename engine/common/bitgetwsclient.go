@@ -9,8 +9,8 @@ import (
 	"github.com/robfig/cron"
 	"github.com/zodiac163/bitget_api/config"
 	"github.com/zodiac163/bitget_api/constants"
-	"github.com/zodiac163/bitget_api/internal"
-	"github.com/zodiac163/bitget_api/internal/model"
+	internal "github.com/zodiac163/bitget_api/engine"
+	"github.com/zodiac163/bitget_api/engine/model"
 	"github.com/zodiac163/bitget_api/logging/applogger"
 )
 

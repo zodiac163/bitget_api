@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/zodiac163/bitget_api/internal"
+	internal "github.com/zodiac163/bitget_api/engine"
 )
 
 func TestSigner_Sign(t *testing.T) {

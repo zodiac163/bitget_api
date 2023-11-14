@@ -8,7 +8,7 @@ import (
 
 	"github.com/zodiac163/bitget_api/config"
 	"github.com/zodiac163/bitget_api/constants"
-	"github.com/zodiac163/bitget_api/internal"
+	internal "github.com/zodiac163/bitget_api/engine"
 )
 
 type BitgetRestClient struct {
