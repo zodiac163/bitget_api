@@ -1,7 +1,7 @@
 package v1
 
 import (
-	"github.com/zodiac163/bitget_api/internal/common"
+	"github.com/zodiac163/bitget_api/engine/common"
 )
 
 type MixMarketClient struct {

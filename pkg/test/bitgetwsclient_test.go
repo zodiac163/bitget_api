@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/zodiac163/bitget_api/internal/model"
+	"github.com/zodiac163/bitget_api/engine/model"
 	"github.com/zodiac163/bitget_api/pkg/client/ws"
 )
 

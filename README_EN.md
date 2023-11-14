@@ -21,7 +21,7 @@ Create an order example
 package test
 
 import (
-  "bitget/internal"
+  "bitget/engine"
   "bitget/pkg/client"
   "bitget/pkg/client/v1"
   "fmt"
@@ -57,7 +57,7 @@ Please find more examples for each supported endpoint in the `test` folder.
 package test
 
 import (
-  "bitget/internal/model"
+  "bitget/engine/model"
   "bitget/pkg/client/ws"
   "fmt"
   "testing"
