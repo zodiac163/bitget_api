@@ -44,7 +44,7 @@ func (p *MarginAccountClient) MaxTransferable(params map[string]string) (string,
 // 	return resp, err
 // }
 
-func (p *MarginAccountClient) TransferRecords(params map[string]string) (string, error) {
-	resp, err := p.BitgetRestClient.DoGet("/api/v2/spot/account/transferRecords", params)
-	return resp, err
-}
+// func (p *MarginAccountClient) TransferRecords(params map[string]string) (string, error) {
+// 	resp, err := p.BitgetRestClient.DoGet("/api/v2/spot/account/transferRecords", params)
+// 	return resp, err
+// }
