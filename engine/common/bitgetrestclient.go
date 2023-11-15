@@ -1,8 +1,8 @@
 package common
 
 import (
-	"crypto/tls"
 	"io/ioutil"
+	"net"
 	"net/http"
 	"strings"
 	"time"
@@ -31,16 +31,11 @@ func (p *BitgetRestClient) Init() *BitgetRestClient {
 	p.HttpClient = http.Client{
 		Timeout: time.Duration(config.TimeoutSecond) * time.Second,
 		Transport: &http.Transport{
-			TLSHandshakeTimeout: 10 * time.Second,
-			TLSClientConfig: &tls.Config{
-				MinVersion: tls.VersionTLS12,
-				CipherSuites: []uint16{
-					tls.TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,
-					tls.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
-					tls.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
-					tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
-				},
-			},
+			Dial: (&net.Dialer{
+				Timeout:   60 * time.Second,
+				KeepAlive: 30 * time.Second,
+			}).Dial,
+			TLSHandshakeTimeout: 60 * time.Second,
 		},
 	}
 	return p
