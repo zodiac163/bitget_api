@@ -47,7 +47,8 @@ func (p *BitgetRestClient) DoPost(uri string, params string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	response, err := p.HttpClient.Do(request)
+	//response, err := p.HttpClient.Do(request)
+	response, err := http.DefaultClient.Do(request)
 
 	if err != nil {
 		return "", err
