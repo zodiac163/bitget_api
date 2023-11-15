@@ -1,6 +1,7 @@
 package common
 
 import (
+	"crypto/tls"
 	"io/ioutil"
 	"net/http"
 	"strings"
@@ -29,6 +30,18 @@ func (p *BitgetRestClient) Init() *BitgetRestClient {
 	p.Signer = new(Signer).Init(config.SecretKey)
 	p.HttpClient = http.Client{
 		Timeout: time.Duration(config.TimeoutSecond) * time.Second,
+		Transport: &http.Transport{
+			TLSHandshakeTimeout: 10 * time.Second,
+			TLSClientConfig: &tls.Config{
+				MinVersion: tls.VersionTLS12,
+				CipherSuites: []uint16{
+					tls.TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,
+					tls.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
+					tls.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
+					tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
+				},
+			},
+		},
 	}
 	return p
 }
@@ -47,8 +60,7 @@ func (p *BitgetRestClient) DoPost(uri string, params string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	//response, err := p.HttpClient.Do(request)
-	response, err := http.DefaultClient.Do(request)
+	response, err := p.HttpClient.Do(request)
 
 	if err != nil {
 		return "", err
