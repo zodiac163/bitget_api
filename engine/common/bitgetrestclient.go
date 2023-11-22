@@ -1,7 +1,6 @@
 package common
 
 import (
-	"io/ioutil"
 	"net/http"
 	"strings"
 
@@ -85,7 +84,7 @@ func (p *BitgetRestClient) DoPost(uri string, params string) (string, error) {
 }
 
 func (p *BitgetRestClient) DoGet(uri string, params map[string]string) (string, error) {
-	timesStamp := internal.TimesStamp()
+	/*timesStamp := internal.TimesStamp()
 	body := internal.BuildGetParams(params)
 
 	sign := p.Signer.Sign(constants.GET, uri, body, timesStamp)
@@ -112,5 +111,6 @@ func (p *BitgetRestClient) DoGet(uri string, params map[string]string) (string, 
 	}
 
 	responseBodyString := string(bodyStr)
-	return responseBodyString, err
+	return responseBodyString, err*/
+	return "", nil
 }
