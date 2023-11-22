@@ -1,10 +1,12 @@
 package common
 
 import (
+	"io/ioutil"
+	"net"
 	"net/http"
 	"strings"
+	"time"
 
-	"github.com/go-resty/resty/v2"
 	"github.com/zodiac163/bitget_api/config"
 	"github.com/zodiac163/bitget_api/constants"
 	internal "github.com/zodiac163/bitget_api/engine"
@@ -15,9 +17,8 @@ type BitgetRestClient struct {
 	ApiSecretKey string
 	Passphrase   string
 	BaseUrl      string
-	HttpClient   *resty.Client
-	//HttpClient   http.Client
-	Signer *Signer
+	HttpClient   http.Client
+	Signer       *Signer
 }
 
 func (p *BitgetRestClient) Init() *BitgetRestClient {
@@ -27,7 +28,7 @@ func (p *BitgetRestClient) Init() *BitgetRestClient {
 	p.BaseUrl = config.BaseUrl
 	p.Passphrase = config.PASSPHRASE
 	p.Signer = new(Signer).Init(config.SecretKey)
-	/*p.HttpClient = http.Client{
+	p.HttpClient = http.Client{
 		Timeout: time.Duration(config.TimeoutSecond) * time.Second,
 		Transport: &http.Transport{
 			Dial: (&net.Dialer{
@@ -36,8 +37,7 @@ func (p *BitgetRestClient) Init() *BitgetRestClient {
 			}).Dial,
 			TLSHandshakeTimeout: 60 * time.Second,
 		},
-	}*/
-	p.HttpClient = resty.New()
+	}
 	return p
 }
 
@@ -55,36 +55,25 @@ func (p *BitgetRestClient) DoPost(uri string, params string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	clientInit := p.HttpClient.R().
-		SetHeader(constants.ContentType, constants.ApplicationJson).
-		SetHeader(constants.BgAccessKey, p.ApiKey).
-		SetHeader(constants.BgAccessSign, sign).
-		SetHeader(constants.BgAccessTimestamp, timesStamp).
-		SetHeader(constants.BgAccessPassphrase, p.Passphrase)
-	var resp *resty.Response
-
-	resp, err = clientInit.Post(config.BaseUrl + uri)
-	//response, err := p.HttpClient.Do(request)
+	response, err := p.HttpClient.Do(request)
 
 	if err != nil {
 		return "", err
 	}
 
-	//defer response.Body.Close()
+	defer response.Body.Close()
 
-	/*bodyStr, err := ioutil.ReadAll(response.Body)
+	bodyStr, err := ioutil.ReadAll(response.Body)
 	if err != nil {
 		return "", err
-	}*/
+	}
 
-	//responseBodyString := string(bodyStr)
-	//return responseBodyString, err
-	responseBodyString := string(resp.Body())
+	responseBodyString := string(bodyStr)
 	return responseBodyString, err
 }
 
 func (p *BitgetRestClient) DoGet(uri string, params map[string]string) (string, error) {
-	/*timesStamp := internal.TimesStamp()
+	timesStamp := internal.TimesStamp()
 	body := internal.BuildGetParams(params)
 
 	sign := p.Signer.Sign(constants.GET, uri, body, timesStamp)
@@ -111,6 +100,5 @@ func (p *BitgetRestClient) DoGet(uri string, params map[string]string) (string, 
 	}
 
 	responseBodyString := string(bodyStr)
-	return responseBodyString, err*/
-	return "", nil
+	return responseBodyString, err
 }
