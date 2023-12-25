@@ -2,7 +2,6 @@ package common
 
 import (
 	"io/ioutil"
-	"net"
 	"net/http"
 	"strings"
 	"time"
@@ -30,13 +29,6 @@ func (p *BitgetRestClient) Init() *BitgetRestClient {
 	p.Signer = new(Signer).Init(config.SecretKey)
 	p.HttpClient = http.Client{
 		Timeout: time.Duration(config.TimeoutSecond) * time.Second,
-		Transport: &http.Transport{
-			Dial: (&net.Dialer{
-				Timeout:   60 * time.Second,
-				KeepAlive: 30 * time.Second,
-			}).Dial,
-			TLSHandshakeTimeout: 60 * time.Second,
-		},
 	}
 	return p
 }
